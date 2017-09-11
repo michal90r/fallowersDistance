@@ -19,8 +19,15 @@ function parseJson(response) {
 
 function parseUser(user) {
     return {
+        login: user.login,
         location: user.location,
         followers: user.followers
+    }
+}
+
+function parseFollower(follower) {
+    return {
+        login: follower.login
     }
 }
 
@@ -39,6 +46,14 @@ const GithubClient = {
         return this._get(
             GITHUB_BASE_URI + "/users/" + userName
         ).then((data) => parseUser(data));
+    },
+
+    getUserFollowers(userName) {
+        return this._get(
+            GITHUB_BASE_URI + "/users/" + userName + "/followers"
+        ).then((data) => (
+           data.map((f) => parseFollower(f))
+        ));
     }
 };
 

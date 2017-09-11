@@ -21,4 +21,13 @@ app.get('/api/user', (req, res) => {
     ))*/
 });
 
+
+app.get('/api/user/followers', (req, res) => {
+    const userName = req.query.userName;
+
+    GithubClient.getUserFollowers(userName).then((userFollowers) => (
+        res.json(userFollowers)
+    ))
+});
+
 export default app;

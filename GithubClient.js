@@ -21,7 +21,6 @@ function parseUser(user) {
     return {
         login: user.login,
         location: user.location,
-        followers: user.followers
     }
 }
 

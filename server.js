@@ -1,7 +1,8 @@
 const express = require('express');
 const fs = require('fs');
 
-import GithubClient from './GithubClient'
+
+import DistanceClient from './DystansClient'
 import Followers from './Followers'
 
 const app = express();
@@ -13,21 +14,15 @@ app.get('/api/user', (req, res) => {
 
     Followers.getUserLocation(userName).then((userData) => (
         res.json(userData)
-    ))/*.catch((error) => (
-        res.status(500).json({
-            success: false,
-            message: 'There was an error when interfacing with Github'
-            error: error
-        })
-    ))*/
+    ))
 });
 
 
-app.get('/api/user/followers', (req, res) => {
-    const userName = req.query.userName;
+app.get('/api/user/distance', (req, res) => {
+    const secondLocation = req.query.city;
 
-    GithubClient.getUserFollowers(userName).then((userFollowers) => (
-        res.json(userFollowers)
+    DistanceClient.getDistance("Krakow",secondLocation).then((distance) => (
+        res.json(distance)
     ))
 });
 

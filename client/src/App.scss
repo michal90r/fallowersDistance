@@ -1,24 +1,76 @@
-.App {
-  text-align: center;
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+#formWrapper {
+  position: absolute;
+  top: 140px;
+  left: 60px;
+
+  form {
+    display: flex;
+  }
+
+  input {
+    padding: 10px;
+    width: 250px;
+    font-weight: bold;
+  }
+
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+
+#listWrapper {
+  display: block;
+  position: absolute;
+  top: 250px;
+  left: 60px;
+  border-top: 3px solid #000000;
+  width: 350px;
+  padding-top: 5px;
+
+  .row {
+    border-bottom: 1px solid #000000;
+    padding: 10px 0 10px 0;
+    display: table;
+    width: 350px;
+  }
+
+  .nameCol{
+    display: table-cell;
+    padding-left: 8px;
+    width: 260px;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .distanceCol{
+    display: table-cell;
+    width: 100px;
+    max-width: 277px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
 }
 
-.App-intro {
-  font-size: large;
+.row {
+  border-bottom: 1px solid #000000;
+  padding: 10px 0 10px 0;
+  display: table;
+  width: 350px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+
+.errorMark{
+  border-color: #ff0000;
 }

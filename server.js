@@ -18,10 +18,10 @@ app.get('/api/user', (req, res) => {
 });
 
 
-app.get('/api/user/distance', (req, res) => {
-    const secondLocation = req.query.city;
+app.get('/api/distance', (req, res) => {
+    const username = req.query.username;
 
-    DistanceClient.getDistance("Krakow",secondLocation).then((distance) => (
+    Followers.getFollowersDistance(username).then((distance) => (
         res.json(distance)
     ))
 });
@@ -29,7 +29,7 @@ app.get('/api/user/distance', (req, res) => {
 app.get('/api/user/users_distance', (req, res) => {
     const userName = req.query.userName;
 
-    Followers.followersLocation(userName).then((followersData) => (
+    Followers.getFollowersLocation(userName).then((followersData) => (
         res.json(followersData)
     ))
 

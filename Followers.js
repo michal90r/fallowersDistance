@@ -1,4 +1,5 @@
 import GithubClient from './GithubClient'
+import DystansClient from './DystansClient'
 
 
 const Followers = {
@@ -11,19 +12,44 @@ const Followers = {
         return GithubClient.getUser(username)
     },
 
+    _getDistance(firstLocation, secondLocation) {
+        return DystansClient.getDistance(firstLocation, secondLocation)
+    },
+
     getUserLocation(username) {
         return this._getUser(username).then(
             (user) => user.location
         );
     },
 
-    followersLocation(username) {
+    getFollowersLocation(username) {
         return this._getUserFollowers(username)
             .then((followers) => (
                 Promise.all(followers.map((follower) => this._getUser(follower.login)))
             ));
 
-    }
+    },
+
+    getFollowersDistance(username) {
+        return Promise.all([
+            this.getUserLocation(username),
+            this.getFollowersLocation(username),
+        ]).then(([userLocation, followers]) => {
+            return Promise.all(followers.map((follower) => {
+                    return Promise.all([
+                        this._getDistance(userLocation, follower.location),
+                        follower.login
+                    ]).then(([distance, login]) => (
+                        {
+                            login: login,
+                            distance: distance
+                        }
+                    ))
+                })
+            )
+        })
+    },
+
 };
 
 export default Followers;

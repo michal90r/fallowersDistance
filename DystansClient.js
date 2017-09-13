@@ -18,9 +18,7 @@ function parseJson(response) {
 }
 
 function parseDistance(data) {
-    return {
-        distance: data.distance,
-    }
+    return data.distance
 }
 
 const DYSTANS_BASE_URI = "http://www.dystans.org";
@@ -34,9 +32,9 @@ const DystansClient = {
             .then(parseJson)
     },
 
-    getDistance(firstLocation, secoundLocation) {
+    getDistance(firstLocation, secondLocation) {
         return this._get(
-            DYSTANS_BASE_URI + "/route.json?stops=" + firstLocation + "|" + secoundLocation
+            DYSTANS_BASE_URI + "/route.json?stops=" + firstLocation + "|" + secondLocation
         ).then((data) => parseDistance(data));
     }
 };

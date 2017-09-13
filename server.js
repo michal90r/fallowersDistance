@@ -1,8 +1,5 @@
 const express = require('express');
-const fs = require('fs');
 
-
-import DistanceClient from './DystansClient'
 import Followers from './Followers'
 
 const app = express();
@@ -21,7 +18,7 @@ app.get('/api/user', (req, res) => {
 app.get('/api/distance', (req, res) => {
     const username = req.query.username;
 
-    Followers.getFollowersDistance(username).then((distance) => (
+    Followers.getTenTheFarthest(username).then((distance) => (
         res.json(distance)
     ))
 });

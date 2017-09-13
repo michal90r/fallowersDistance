@@ -50,6 +50,12 @@ const Followers = {
         })
     },
 
+    getTenTheFarthest(username) {
+        return this.getFollowersDistance(username)
+            .then((followers) => followers.sort((a,b) => (
+                parseFloat(b.distance) - parseFloat(a.distance)
+            ))).then((result) => result.slice(0,10))
+    }
 };
 
 export default Followers;

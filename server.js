@@ -12,7 +12,13 @@ app.get('/api/distance', (req, res) => {
 
     Followers.getTenTheFarthest(username).then((distance) => (
         res.json(distance)
-    ))
+    )).catch((error) => (
+        res.status(500).json({
+            success: false,
+            message: 'There was an error when interfacing with Github or Dystans.org',
+            error: error,
+        })
+    ));
 });
 
 

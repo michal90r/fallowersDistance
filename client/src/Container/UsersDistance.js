@@ -32,6 +32,7 @@ function reducer(state = [
 ], action) {
     switch (action.type) {
         case 'SEARCH_USER': {
+            // eslint-disable-next-line
             const searchUser = {
                 username: action.username,
             };

@@ -16,45 +16,45 @@ const Followers = {
         return DystansClient.getDistance(firstLocation, secondLocation)
     },
 
-    getUserLocation(username) {
+    _getUserLocation(username) {
         return this._getUser(username).then(
             (user) => user.location
         );
     },
 
-    getFollowersLocation(username) {
+    _getFollowersLocation(username) {
         return this._getUserFollowers(username)
             .then((followers) => (
                 Promise.all(followers.map((follower) => this._getUser(follower.login)))
             ));
-
     },
 
-    getFollowersDistance(username) {
+    _calculateFollowersDistance(userLocation, followers) {
+        return Promise.all(followers.map((follower) => (
+            Promise.all([
+                this._getDistance(userLocation, follower.location),
+                follower.login
+            ]).then(([distance, login]) => ({
+                login: login,
+                distance: distance
+            }))
+        )))
+    },
+
+    _getFollowersDistance(username) {
         return Promise.all([
-            this.getUserLocation(username),
-            this.getFollowersLocation(username),
-        ]).then(([userLocation, followers]) => {
-            return Promise.all(followers.map((follower) => {
-                    return Promise.all([
-                        this._getDistance(userLocation, follower.location),
-                        follower.login
-                    ]).then(([distance, login]) => (
-                        {
-                            login: login,
-                            distance: distance
-                        }
-                    ))
-                })
-            )
-        })
+            this._getUserLocation(username),
+            this._getFollowersLocation(username),
+        ]).then(([userLocation, followers]) => (
+            this._calculateFollowersDistance(userLocation, followers)
+        ))
     },
 
     getTenTheFarthest(username) {
-        return this.getFollowersDistance(username)
-            .then((followers) => followers.sort((a,b) => (
-                parseFloat(b.distance) - parseFloat(a.distance)
-            ))).then((result) => result.slice(0,10))
+        return this._getFollowersDistance(username)
+            .then((followers) => followers.sort((a, b) => (
+                b.distance - a.distance
+            ))).then((result) => result.slice(0, 10))
     }
 };
 

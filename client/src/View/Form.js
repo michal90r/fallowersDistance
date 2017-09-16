@@ -38,11 +38,11 @@ class Form extends React.Component {
     };
 
     validate = () => {
-        const row = this.state.fields;
+        const username = this.state.fields;
         const fieldErrors = this.state.fieldErrors;
         const errMessages = Object.keys(fieldErrors).filter((k) => fieldErrors[k]);
 
-        if (!row.title) return true;
+        if (!username) return true;
         if (errMessages.length) return true;
 
         return false;
@@ -62,6 +62,7 @@ class Form extends React.Component {
                         value={this.state.fields.username}
                         onChange={this.onInputChange}
                         validate={(val) => (this.isValidUsername(val) ? false : 'Invalid Username')}
+                        autoFocus={true}
                     />
 
 

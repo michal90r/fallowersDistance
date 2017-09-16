@@ -13,6 +13,7 @@ class Field extends React.Component {
         value: PropTypes.string,
         validate: PropTypes.func,
         onChange: PropTypes.func.isRequired,
+        autoFocus: PropTypes.bool,
     };
 
     state = {
@@ -43,6 +44,7 @@ class Field extends React.Component {
                     value={this.state.value}
                     onChange={this.onChange}
                     className={this.state.error && "errorMark"}
+                    autoFocus={this.props.autoFocus}
                 />
             </div>
         );

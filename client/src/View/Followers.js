@@ -8,7 +8,6 @@ import '../App.css';
 
 const Followers = (props) => (
     <div>
-        <h1>{props.title}</h1>
         <div id="formWrapper">
             <Form
                 onSubmit={props.onFormSubmit}
@@ -16,7 +15,7 @@ const Followers = (props) => (
         </div>
         <div id="listWrapper">
             <List
-                rows={props.usersDistance}
+                rows={props.rows}
             />
         </div>
     </div>

@@ -36,7 +36,7 @@ function reducer(state = [
             const searchUser = {
                 username: action.username,
             };
-            return //:TODO
+            return state
         }
         default: {
             return state
@@ -57,7 +57,7 @@ const store = createStore(reducer);
 
 const mapStateToFollowersProps = (state) => {
     return {
-        usersDistance : state
+        rows : state
     };
 };
 

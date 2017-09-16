@@ -48,8 +48,8 @@ class Form extends React.Component {
         return false;
     };
 
-    isValidDate = (val) => {
-        return true ? true : true //:TODO here statement returning false if username has space;
+    isValidUsername = (val) => {
+        return val=== "" ? false  : !/\s/g.test(val) //:TODO here statement returning false if username has space;
     };
 
     render() {
@@ -61,7 +61,7 @@ class Form extends React.Component {
                         name="username"
                         value={this.state.fields.username}
                         onChange={this.onInputChange}
-                        validate={(val) => (this.isValidDate(val) ? false : 'Invalid Username')}
+                        validate={(val) => (this.isValidUsername(val) ? false : 'Invalid Username')}
                     />
 
 

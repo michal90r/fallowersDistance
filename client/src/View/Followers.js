@@ -16,7 +16,7 @@ const Followers = (props) => (
         </div>
         <div id="listWrapper">
             <List
-                rows={props.rows}
+                rows={props.usersDistance}
             />
         </div>
     </div>

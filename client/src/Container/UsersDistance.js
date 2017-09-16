@@ -57,7 +57,7 @@ const store = createStore(reducer);
 
 const mapStateToFollowersProps = (state) => {
     return {
-        rows : state
+        usersDistance : state
     };
 };
 

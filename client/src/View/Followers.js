@@ -19,13 +19,15 @@ class Followers extends React.Component {
         rows: this.props.rows || {
             username: "",
             distance: ""
-        }
+        },
+        isLoading: this.props.isLoading
     };
 
     componentWillReceiveProps(update) {
         console.log('this.props.rows', this.props.rows, update);
-
-        this.setState({ rows: update.rows });
+        this.setState({
+            rows: update.rows
+        });
     }
 
     render() {
@@ -36,10 +38,20 @@ class Followers extends React.Component {
                         onSubmit={this.props.onFormSubmit}
                     />
                 </div>
-                <div id="listWrapper">
-                    <List
-                        rows={this.props.rows}
-                    />
+                <div className="list&loading">
+                {
+                    this.state.isLoading &&
+                    <div className="loading">
+                        <img src={logo} className="App-logo" alt="logo"/>
+                        <div className="loadingText">LOADING</div>
+                    </div>
+                }
+                {
+                    !this.state.isLoading &&
+                    <div id="listWrapper">
+                        <List rows={this.state.rows}/>
+                    </div>
+                }
                 </div>
             </div>
         )

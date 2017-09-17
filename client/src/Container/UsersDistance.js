@@ -13,7 +13,7 @@ const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 const mapStateToProps = (state) => ({
     isLoading: state.isLoading,
-    rows: state.users
+    users: state.users
 });
 
 const mapDispatchToProps = (dispatch) => ({

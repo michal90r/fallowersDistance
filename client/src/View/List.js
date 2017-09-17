@@ -6,14 +6,14 @@ import '../App.css';
 const List = (props) => (
     <div>
         {
-            props.rows.map((row, index) => (
+            props.users.map((user, index) => (
                 <div
                     className="row"
                     key={index}
                 >
                     <div>
-                        <div className="nameCol">{row.username}</div>
-                        <div className="distanceCol">{row.distance}</div>
+                        <div className="nameCol">{user.username}</div>
+                        <div className="distanceCol">{user.distance}</div>
                     </div>
                 </div>
             ))

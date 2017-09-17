@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 
 const Client = {
     getTenTheFarthestFollowers(username) {
-        const url = 'api/distance?username?=' + username;
+        const url = 'api/distance?username=' + username;
         return fetch(url, {
             method: 'get',
             header: {

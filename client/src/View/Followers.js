@@ -10,13 +10,13 @@ import logo from '../logo.svg'
 class Followers extends React.Component {
 
     static propTypes = {
-        rows: PropTypes.array.isRequired,
+        users: PropTypes.array.isRequired,
         isLoading: PropTypes.bool.isRequired,
         onFormSubmit: PropTypes.func.isRequired,
     };
 
     state = {
-        rows: this.props.rows || {
+        users: this.props.users || {
             username: "",
             distance: ""
         },
@@ -24,9 +24,10 @@ class Followers extends React.Component {
     };
 
     componentWillReceiveProps(update) {
-        console.log('this.props.rows', this.props.rows, update);
+        console.log('this.props.rows', this.props.users, update);
         this.setState({
-            rows: update.rows
+            users: update.users,
+            isLoading: update.isLoading
         });
     }
 
@@ -49,7 +50,7 @@ class Followers extends React.Component {
                 {
                     !this.state.isLoading &&
                     <div id="listWrapper">
-                        <List rows={this.state.rows}/>
+                        <List users={this.state.users}/>
                     </div>
                 }
                 </div>

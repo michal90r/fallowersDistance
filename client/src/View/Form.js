@@ -49,7 +49,7 @@ class Form extends React.Component {
     };
 
     isValidUsername = (val) => {
-        return val=== "" ? false  : !/\s/g.test(val) //:TODO here statement returning false if username has space;
+        return val=== "" ? false  : !/\s/g.test(val);
     };
 
     render() {

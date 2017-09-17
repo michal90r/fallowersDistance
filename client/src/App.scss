@@ -60,17 +60,19 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
 }
-
-.row {
-  border-bottom: 1px solid #000000;
-  padding: 10px 0 10px 0;
-  display: table;
-  width: 350px;
-}
-
 
 .errorMark{
   border-color: #ff0000;
 }
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+

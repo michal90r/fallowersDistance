@@ -1,77 +1,30 @@
 import React from 'react';
-import {createStore} from 'redux'
+import thunkMiddleware from 'redux-thunk';
+import {createStore, applyMiddleware} from 'redux'
 import {Provider, connect} from 'react-redux'
+
+import {reducer} from './Reducer'
+import {fetchUsers} from "./Actions";
 
 import {Followers} from '../View/Followers'
 
-function reducer(state = [
-    {
-        username: "aigeano",
-        distance: 11963
-    },
-    {
-        username: "monica017",
-        distance: 9189
-    },
-    {
-        username: "fxrcode",
-        distance: 3609
-    },
-    {
-        username: "stuartpb",
-        distance: 193
-    },
-    {
-        username: "jb55",
-        distance: 2
-    },
-    {
-        username: "kbwatts",
-        distance: 2
-    }
-], action) {
-    switch (action.type) {
-        case 'SEARCH_USER': {
-            // eslint-disable-next-line
-            const searchUser = {
-                username: action.username,
-            };
-            return state
-        }
-        default: {
-            return state
-        }
-    }
-}
 
-function searchUser(username) {
-    return {
-        type: 'SEARCH_USER',
-        username: username,
-    };
-}
+const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
+const mapStateToProps = (state) => ({
+    isLoading: state.isLoading,
+    rows: state.users
+});
 
-
-const store = createStore(reducer);
-
-const mapStateToFollowersProps = (state) => {
-    return {
-        rows : state
-    };
-};
-
-const mapDispatchToFollowersProps = (dispatch) => (
-    {
-        onFormSubmit: (e) => (
-            dispatch(searchUser(e.username))
-        )
-    }
-);
+const mapDispatchToProps = (dispatch) => ({
+    onFormSubmit: (e) => (
+        dispatch(fetchUsers(e.username))
+    )
+});
 
 const UsersDistance = connect(
-    mapStateToFollowersProps,
-    mapDispatchToFollowersProps
+    mapStateToProps,
+    mapDispatchToProps
 )(Followers);
 
 

@@ -35,7 +35,7 @@ const Followers = {
                 this._getDistance(userLocation, follower.location),
                 follower.login
             ]).then(([distance, login]) => ({
-                login: login,
+                username: login,
                 distance: distance
             }))
         )))

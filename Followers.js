@@ -50,12 +50,27 @@ const Followers = {
         ))
     },
 
-    getTenTheFarthest(username) {
+    _getTenTheFarthest(username) {
         return this._getFollowersDistance(username)
             .then((followers) => followers.sort((a, b) => (
                 b.distance - a.distance
             ))).then((result) => result.slice(0, 10))
-    }
+    },
+
+    getTenTheFarthest(username) {
+        return this._getUser(username).then((user) => {
+            return user.location ? this._getTenTheFarthest(user.login) : [{
+                    username: "user didn't specify location",
+                }]}).catch(e => {
+                if(e.message === 'HTTP Error Not Found') {
+                    return [{ username: "user doesn't exist" }]
+                } else {
+                    throw new Error(`HTTP Error ${response.statusText}`)
+                }})
+    },
+
+
+
 };
 
 export default Followers;
